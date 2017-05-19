@@ -1,2 +1,14 @@
 
-export const LOG_IN = 'LOG_IN';
+export const LOGIN_INIT = 'LOGIN_INIT'
+
+export const LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL'
+
+export const LOGIN_UNSUCCESSFUL = 'LOGIN_UNSUCCESSFUL'
+
+export const SIGNUP_UNSUCCESSFUL = 'SIGNUP_UNSUCCESSFUL'
+
+export const SIGNOUT = 'SIGNOUT'
+
+export const EDITING = 'EDITING'
+
+export const TOGGLE_SIGNUP_LOGIN = 'TOGGLE_SIGNUP_LOGIN'
