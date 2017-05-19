@@ -9,10 +9,15 @@ import UserContainer from '../containers/UserContainer';
 // This code here binds your smart component to the redux store.
 // railsContext provides contextual information especially useful for server rendering, such as
 // knowing the locale. See the React on Rails documentation for more info on the railsContext
-const UserApp = (props, _railsContext) => (
-  <Provider store={configureStore(props)}>
-    <UserContainer />
-  </Provider>
-);
+
+
+const UserApp = (props, _railsContext) => {
+  var store = configureStore(props)
+  return (
+    <Provider store={store}>
+      <UserContainer />
+    </Provider>
+  )
+}
 
 export default UserApp;

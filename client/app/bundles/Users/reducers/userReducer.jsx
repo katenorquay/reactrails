@@ -2,17 +2,8 @@ import { combineReducers } from 'redux';
 import * as actionTypes from '../constants/userConstants';
 import clone from 'clone'
 
-export const initialState = {
-  loggedIn: false,
-  loginInProgress: false,
-  loginUnsuccessful: false,
-  signupUnsuccessful: false,
-  editingSuccessful: false,
-  signUp: false,
-}
-
-const userReducer = (initialState, action) => {
-  var newState = clone(initialState)
+const userReducer = (state = {}, action) => {
+  var newState = clone(state)
   switch (action.type) {
     case actionTypes.LOGIN_INIT:
       newState.loginInProgress = true
@@ -21,13 +12,14 @@ const userReducer = (initialState, action) => {
       newState.loginInProgress = false
       newState.loginUnsuccessful = false
       newState.loggedIn = true
+      newState.currentUser = action.payload
       return newState
     case actionTypes.LOGIN_UNSUCCESSFUL:
       newState.loginInProgress = false
       newState.loginUnsuccessful = true
       return newState
     case actionTypes.SIGNUP_UNSUCCESSFUL:
-      newState.signupUnsuccessful = true
+      newState.signupError = true
       return newState
     case actionTypes.SIGNOUT:
       newState.loggedIn = false
@@ -40,7 +32,7 @@ const userReducer = (initialState, action) => {
       return newState
     case actionTypes.TOGGLE_SIGNUP_LOGIN:
       newState.signUp = !newState.signUp
-      newState.signupUnsuccessful = false
+      newState.signupError = false
       newState.loginUnsuccessful = false
       return newState
     default:
@@ -48,4 +40,4 @@ const userReducer = (initialState, action) => {
   }
 };
 
-export default userReducer;
+export default userReducer

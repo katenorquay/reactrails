@@ -12,6 +12,7 @@
     "test": "rspec"
   },
   "dependencies": {
-    "clone": "^2.1.1"
+    "clone": "^2.1.1",
+    "redux-thunk": "^2.2.0"
   }
 }

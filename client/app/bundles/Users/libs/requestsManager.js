@@ -6,7 +6,7 @@ const API_URL = 'users.json';
 export default {
 
    @param {Object} entity
-   @returns {Promise} - Result of ajax call.
+   @returns {Promise}
 
   submitSignUp(entity) {
     return request({

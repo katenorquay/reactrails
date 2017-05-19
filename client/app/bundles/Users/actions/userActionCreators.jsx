@@ -1,4 +1,4 @@
-// import requestsManager from '../../../libs/requestsManager'
+import requestsManager from '../lib/requestsManager'
 import * as actionTypes from '../constants/userConstants';
 
 
@@ -7,21 +7,25 @@ export const loginInit = () => ({
 })
 
 export function signupInit(email, password, password_confirmation) {
+  signupUnsuccessful('error')
   return (dispatch) => {
     dispatch(loginInit());
     return (
       requestsManager
-        .submitSignUp({email, password, password_confirmation})
+        .submitSignUp({user: {
+          email: email,
+          password: password,
+          password_confirmation: password_confirmation
+        }})
         .then(res => dispatch(loginSuccessful(res.data)))
         .catch(error => dispatch(signupUnsuccessful(error)))
     )
   }
-
 }
 
 export const loginSuccessful = (user) => ({
   type: actionTypes.LOGIN_SUCCESSFUL,
-  user,
+  payload: user,
 })
 
 export const loginUnsuccessful = () => ({
@@ -30,7 +34,7 @@ export const loginUnsuccessful = () => ({
 
 export const signupUnsuccessful = (error) => ({
   type: actionTypes.SIGNUP_UNSUCCESSFUL,
-  error,
+  payload: error,
 })
 
 export const signout = () => ({
