@@ -7,9 +7,11 @@ export const loginInit = () => ({
 })
 
 export function signupInit(email, password, password_confirmation) {
+  console.log('hitting function')
   signupUnsuccessful('error')
   return (dispatch) => {
     dispatch(loginInit());
+    console.log('under dispatch')
     return (
       requestsManager
         .submitSignUp({user: {

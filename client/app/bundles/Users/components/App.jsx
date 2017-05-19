@@ -7,7 +7,7 @@ const App = ({loggedIn, signupError, signupInit}) => {
   if (signupError == true) {
     return (
       <h1>woo hoo!</h1>
-    )} else if (loggedIn) {
+    )} else if (loggedIn == true) {
       return (
         <h1>signed in</h1>
       )
