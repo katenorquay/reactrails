@@ -6,6 +6,7 @@ const userReducer = (state = {}, action) => {
   var newState = clone(state)
   switch (action.type) {
     case actionTypes.LOGIN_INIT:
+      console.log('hitting reducer')
       newState.loginInProgress = true
       return newState
     case actionTypes.LOGIN_SUCCESSFUL:
@@ -32,7 +33,6 @@ const userReducer = (state = {}, action) => {
       return newState
     case actionTypes.TOGGLE_SIGNUP_LOGIN:
       newState.signUp = !newState.signUp
-      newState.signupError = false
       newState.loginUnsuccessful = false
       return newState
     default:
