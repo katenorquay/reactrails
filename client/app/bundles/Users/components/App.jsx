@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import BaseComponent from '../lib/BaseComponent'
 import _ from 'lodash';
-import signupInit from './helpers'
+import signupInit from '../APIcalls/signupInit'
+import Edit from './Edit'
 
 export default class App extends BaseComponent {
 
@@ -34,13 +35,12 @@ export default class App extends BaseComponent {
   }
 
   render() {
-    const { state, actions } = this.props
-    if (state.signupError) {
-      return (
-        <h1>woo hoo!</h1>
-      )
-    } else if (state.loggedIn) {
-      return ( <h2>loggedin</h2> )
+    console.log(this.props.state)
+    const { state, actions, dispatch } = this.props
+      if (state.loggedIn) {
+        return (
+          <Edit editingSuccessful={state.editingSuccessful} dispatch={dispatch} actions={actions} />
+        )
     } else {
       return (
         <div>

@@ -9,7 +9,6 @@ const userReducer = (state = {}, action) => {
       newState.loginInProgress = true
       return newState
     case actionTypes.LOGIN_SUCCESSFUL:
-      console.log('hitting successful login')
       newState.loginInProgress = false
       newState.loginUnsuccessful = false
       newState.loggedIn = true
@@ -30,6 +29,7 @@ const userReducer = (state = {}, action) => {
       return newState
     case actionTypes.EDITING:
       newState.editingSuccessful = true
+      newState.loggedIn = true
       return newState
     case actionTypes.TOGGLE_SIGNUP_LOGIN:
       newState.signUp = !newState.signUp

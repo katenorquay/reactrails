@@ -4,12 +4,13 @@ function signupInit(userInfo, dispatch, loginInit, signupUnsuccessful, loginSucc
     dispatch(loginInit());
     return (
       request
-        .post('http://localhost:3000/users')
+        .post('http://localhost:3000/v1/users')
         .send(userInfo)
         .end((err, res) => {
           if (err) {
             dispatch(signupUnsuccessful())
-          } else {
+          } else if (res) {
+            console.log(res)
             dispatch(loginSuccessful(res.body))
           }
         })
