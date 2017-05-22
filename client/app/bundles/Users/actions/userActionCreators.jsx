@@ -1,41 +1,55 @@
-import requestsManager from '../lib/requestsManager'
 import * as actionTypes from '../constants/userConstants';
 
 function loginInit() {
-  console.log('hitting loginInit')
   return {
     type: actionTypes.LOGIN_INIT
   }
 }
 
-// export const loginSuccessful = (user) => ({
-//   type: actionTypes.LOGIN_SUCCESSFUL,
-//   payload: user,
-// })
-//
-// export const loginUnsuccessful = () => ({
-//   type: actionTypes.LOGIN_UNSUCCESSFUL
-// })
-//
+function loginSuccessful(user) {
+  return {
+    type: actionTypes.LOGIN_SUCCESSFUL,
+    payload: user
+  }
+}
+
+function loginUnsuccessful() {
+  return {
+    type: actionTypes.LOGIN_UNSUCCESSFUL
+  }
+}
+
 function signupUnsuccessful (error) {
   return {
     type: actionTypes.SIGNUP_UNSUCCESSFUL,
     payload: error
   }
 }
-//
-// export const signout = () => ({
-//   type: actionTypes.SIGNOUT
-// })
-//
-// export const editing = () => ({
-//   type: actionTypes.EDITING
-// })
-//
-// export const toggleSignupLogin = () => ({
-//   type: actionTypes.TOGGLE_SIGNUP_LOGIN
-// })
+
+function signout () {
+  return {
+    type: actionTypes.SIGNOUT
+  }
+}
+
+function editing() {
+  return {
+    type: actionTypes.EDITING
+  }
+}
+
+function toggleSignupLogin() {
+  return {
+    type: actionTypes.TOGGLE_SIGNUP_LOGIN
+  }
+}
 
 module.exports = {
+  loginInit: loginInit,
+  loginSuccessful: loginSuccessful,
+  loginUnsuccessful: loginUnsuccessful,
   signupUnsuccessful: signupUnsuccessful,
-  loginInit: loginInit }
+  signout: signout,
+  editing: editing,
+  toggleSignupLogin: toggleSignupLogin
+}

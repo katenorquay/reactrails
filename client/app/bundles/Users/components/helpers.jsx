@@ -1,6 +1,6 @@
 import request from 'superagent';
 
-function signupInit(userInfo, dispatch, loginInit, signupUnsuccessful) {
+function signupInit(userInfo, dispatch, loginInit, signupUnsuccessful, loginSuccessful) {
     dispatch(loginInit());
     return (
       request
@@ -9,7 +9,9 @@ function signupInit(userInfo, dispatch, loginInit, signupUnsuccessful) {
         .end((err, res) => {
           if (err) {
             dispatch(signupUnsuccessful())
-          } else {}
+          } else {
+            dispatch(loginSuccessful(res.body))
+          }
         })
     )
   }
