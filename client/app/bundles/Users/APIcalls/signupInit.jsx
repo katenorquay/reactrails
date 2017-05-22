@@ -4,7 +4,7 @@ function signupInit(userInfo, dispatch, loginInit, signupUnsuccessful, loginSucc
     dispatch(loginInit());
     return (
       request
-        .post('http://localhost:3000/v1/users')
+        .post('http://localhost:3000/users.json')
         .send(userInfo)
         .end((err, res) => {
           if (err) {
