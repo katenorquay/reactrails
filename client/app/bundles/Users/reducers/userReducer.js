@@ -1,6 +1,5 @@
-import { combineReducers } from 'redux';
-import * as actionTypes from '../constants/userConstants';
-import clone from 'clone'
+const clone = require('clone')
+const actionTypes = require('../constants/userConstants')
 
 const userReducer = (state = {}, action) => {
   var newState = clone(state)
@@ -20,10 +19,10 @@ const userReducer = (state = {}, action) => {
       return newState
     case actionTypes.SIGNUP_UNSUCCESSFUL:
       newState.signupError = true
+      newState.loginInProgress = false
       return newState
     case actionTypes.SIGNOUT:
       newState.loggedIn = false
-      newState.editingSuccessful = false
       newState.currentUser = {}
       newState.signUp = false
       return newState
@@ -40,4 +39,4 @@ const userReducer = (state = {}, action) => {
   }
 };
 
-export default userReducer
+module.exports = userReducer

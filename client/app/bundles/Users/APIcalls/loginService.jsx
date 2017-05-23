@@ -10,8 +10,8 @@ function loginService(userInfo, dispatch, loginInit, loginUnsuccessful, loginSuc
           if (err) {
             dispatch(loginUnsuccessful())
           } else if (res) {
-            console.log(res)
-            dispatch(loginSuccessful(res.body))
+            var user = {id: res.body.id, email: res.body.id}
+            dispatch(loginSuccessful(user))
           }
         })
     )
