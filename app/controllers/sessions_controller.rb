@@ -1,16 +1,29 @@
 class SessionsController < Devise::SessionsController
-  respond_to :json
+
+  # POST /v1/login
   def create
-    resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#new")
-    set_flash_message(:notice, :signed_in) if is_navigational_format?
-    sign_in(resource_name, resource)
-    respond_to do |format|
-      format.html { respond_with resource, :location => after_sign_in_path_for(resource) }
-      format.json {
-         return render :json => {  :success => true,
-           :user => resource
-         }
-      }
+    @user = User.find_for_database_authentication(email: params[:email])
+    return invalid_login_attempt unless @user
+
+    if @user.valid_password?(params[:password])
+      sign_in :user, @user
+      render json: @user
+    else
+      invalid_login_attempt
     end
   end
+
+  def destroy
+    sign_out(@user)
+    render :json=> {:success=>true}
+  end
+
+
+    private
+
+    def invalid_login_attempt
+      warden.custom_failure!
+      render json: {error: 'invalid login attempt'}, status: :unprocessable_entity
+    end
+
 end

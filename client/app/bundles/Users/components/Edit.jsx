@@ -3,6 +3,8 @@ import React from 'react';
 import BaseComponent from '../lib/BaseComponent'
 import _ from 'lodash';
 import editAccount from '../APIcalls/editAccount'
+import Delete from './Delete'
+import Logout from './Logout'
 
 export default class Edit extends BaseComponent {
 
@@ -19,7 +21,7 @@ export default class Edit extends BaseComponent {
      ]);
    }
 
-  handleUpdate(e) {
+  handleUpdate() {
     const { dispatch } = this.props
     const { editing } = this.props.actions
     const userInfo = {
@@ -33,9 +35,9 @@ export default class Edit extends BaseComponent {
   }
 
   render() {
-    if (this.props.editingSuccessful) {
-      return <h1>hello</h1>
-    } else {
+    const { dispatch, currentUser } = this.props
+    const { signout } = this.props.actions
+    const customClass = this.props.editingSuccessful ? '' : 'hidden'
       return (
         <div>
           <h2>Edit Account</h2>
@@ -45,8 +47,9 @@ export default class Edit extends BaseComponent {
             <input id='confirmNewPassword' placeholder='retype new password'/>
             <button onClick={this.handleUpdate}>Submit</button>
           </form>
+          <Logout dispatch={dispatch} signout={signout} />
+          <Delete currentUser={currentUser} dispatch={dispatch} signout={signout} />
         </div>
       )
     }
   }
-}

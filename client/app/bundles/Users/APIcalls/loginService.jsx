@@ -1,15 +1,14 @@
 import request from 'superagent';
 
-function signupInit(userInfo, dispatch, actions) {
-  const { loginInit, signupUnsuccessful, loginSuccessful } = actions
+function loginService(userInfo, dispatch, loginInit, loginUnsuccessful, loginSuccessful) {
     dispatch(loginInit());
     return (
       request
-        .post('http://localhost:3000/users')
+        .post('http://localhost:3000/users/sign_in')
         .send(userInfo)
         .end((err, res) => {
           if (err) {
-            dispatch(signupUnsuccessful())
+            dispatch(loginUnsuccessful())
           } else if (res) {
             console.log(res)
             dispatch(loginSuccessful(res.body))
@@ -18,4 +17,4 @@ function signupInit(userInfo, dispatch, actions) {
     )
   }
 
-module.exports = signupInit
+module.exports = loginService
