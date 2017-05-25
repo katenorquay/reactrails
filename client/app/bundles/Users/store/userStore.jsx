@@ -7,7 +7,6 @@ const initialState = {
   loginInProgress: false,
   loginUnsuccessful: false,
   signupError: false,
-  editingSuccessful: false,
   signUp: false,
   currentUser: {}
 }

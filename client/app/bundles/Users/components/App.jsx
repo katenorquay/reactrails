@@ -19,13 +19,13 @@ export default class App extends BaseComponent {
     console.log(state.currentUser)
       if (state.loggedIn) {
         return (
-          <Edit editingSuccessful={state.editingSuccessful} currentUser={state.currentUser} dispatch={dispatch} actions={actions} />
+          <Edit currentUser={state.currentUser} dispatch={dispatch} actions={actions} />
         )}
       else if (state.signUp) {
-        return ( <Signup dispatch={dispatch} actions={actions}/> )
+        return ( <Signup dispatch={dispatch} actions={actions} signupError={state.signupError}/> )
       }
       else {
-        return ( <Login dispatch={dispatch} actions={actions}/> )
+        return ( <Login dispatch={dispatch} actions={actions} loginUnsuccessful={state.loginUnsuccessful}/> )
     }
   }
 }

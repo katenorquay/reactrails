@@ -14,8 +14,7 @@ class RegistrationsController < Devise::RegistrationsController
     @user = User.find_by_email(user_params[:email])
 
     if @user.update_attributes(user_params)
-      render :json=> @user.as_json(:email=> @user.email), :status=>201
-      return
+      render json: @user
     else
       warden.custom_failure!
       render :json=> @user.errors, :status=>422

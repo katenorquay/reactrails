@@ -38,6 +38,7 @@ export default class Signup extends BaseComponent {
   }
 
   render() {
+    const errorClass = this.props.signupError ? '' : 'hidden'
     return (
       <div>
         <h2>Sign Up!</h2>
@@ -47,6 +48,7 @@ export default class Signup extends BaseComponent {
           <input id='password_confirmation' placeholder='retype password'/>
           <button onClick={this.handleSignup}>Submit</button>
           <button onClick={this.newLogin}>Login</button>
+          <p className={errorClass}>Signup was unsuccessful</p>
         </form>
       </div>
     )

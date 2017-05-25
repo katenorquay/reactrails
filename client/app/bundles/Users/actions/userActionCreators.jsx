@@ -13,9 +13,10 @@ function loginSuccessful(user) {
   }
 }
 
-function loginUnsuccessful() {
+function loginUnsuccessful(error) {
   return {
-    type: actionTypes.LOGIN_UNSUCCESSFUL
+    type: actionTypes.LOGIN_UNSUCCESSFUL,
+    payload: error
   }
 }
 
@@ -32,12 +33,6 @@ function signout () {
   }
 }
 
-function editing() {
-  return {
-    type: actionTypes.EDITING
-  }
-}
-
 function toggleSignupLogin() {
   return {
     type: actionTypes.TOGGLE_SIGNUP_LOGIN
@@ -50,6 +45,5 @@ module.exports = {
   loginUnsuccessful: loginUnsuccessful,
   signupUnsuccessful: signupUnsuccessful,
   signout: signout,
-  editing: editing,
   toggleSignupLogin: toggleSignupLogin
 }

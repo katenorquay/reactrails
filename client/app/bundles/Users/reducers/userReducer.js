@@ -26,10 +26,6 @@ const userReducer = (state = {}, action) => {
       newState.currentUser = {}
       newState.signUp = false
       return newState
-    case actionTypes.EDITING:
-      newState.editingSuccessful = true
-      newState.loggedIn = true
-      return newState
     case actionTypes.TOGGLE_SIGNUP_LOGIN:
       newState.signUp = !newState.signUp
       newState.loginUnsuccessful = false
