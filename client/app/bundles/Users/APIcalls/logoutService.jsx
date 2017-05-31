@@ -9,7 +9,7 @@ function logoutService(dispatch, signout) {
       } else {
         dispatch(signout())
       }
-    })
-}
+    });
+};
 
 module.exports = logoutService

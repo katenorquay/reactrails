@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import BaseComponent from '../lib/BaseComponent'
-import _ from 'lodash';
-import PropTypes from 'prop-types';
-import deleteAccount from '../APIcalls/deleteAccount'
+import React, { Component } from "react"
+import BaseComponent from "../lib/BaseComponent"
+import _ from "lodash";
+import PropTypes from "prop-types";
+import deleteAccount from "../APIcalls/deleteAccount"
 
 export default class Delete extends BaseComponent {
 
@@ -14,22 +14,18 @@ export default class Delete extends BaseComponent {
 
   constructor() {
      super();
-     _.bindAll(this, [
-       'handleDelete',
-     ]);
-   }
+     _.bindAll(this, "handleDelete");
+   };
 
    handleDelete() {
-    const { dispatch, currentUser, signout } = this.props
-    var userInfo = { user: { email: currentUser.email }}
-    deleteAccount(userInfo, dispatch, signout)
-  }
+     const { dispatch, currentUser, signout } = this.props
+     let userInfo = { user: { email: currentUser.email }}
+     deleteAccount(userInfo, dispatch, signout)
+  };
 
   render () {
-    return (
-      <button onClick={this.handleDelete}>Delete Account</button>
-    )
-  }
-}
+    return <button onClick={this.handleDelete}>Delete Account</button>
+  };
+};
 
 module.exports = Delete

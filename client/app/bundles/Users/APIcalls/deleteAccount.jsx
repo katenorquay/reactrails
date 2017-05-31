@@ -12,7 +12,7 @@ function deleteAccount(userInfo, dispatch, signout) {
       } else {
         dispatch(signout())
       }
-    })
-}
+    });
+};
 
 module.exports = deleteAccount

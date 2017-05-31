@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import BaseComponent from '../lib/BaseComponent'
-import _ from 'lodash';
-import request from 'superagent';
-import ReactOnRails from 'react-on-rails';
-import Delete from './Delete'
-import Logout from './Logout'
+import PropTypes from "prop-types";
+import React from "react";
+import BaseComponent from "../lib/BaseComponent"
+import _ from "lodash";
+import request from "superagent";
+import ReactOnRails from "react-on-rails";
+import Delete from "./Delete"
+import Logout from "./Logout"
 
 export default class Edit extends BaseComponent {
 
@@ -18,9 +18,9 @@ export default class Edit extends BaseComponent {
   constructor() {
      super();
      this.state = {
-       editingSuccessful: null,
+       editSuccessful: null,
      };
-     _.bindAll(this, 'handleUpdate');
+     _.bindAll(this, ["handleUpdate", "getEditData"]);
    }
 
   handleUpdate(e) {
@@ -30,14 +30,14 @@ export default class Edit extends BaseComponent {
     const userInfo = {
       user: {
         email: currentUser.email,
-        password: document.getElementById('newPassword').value,
-        password_confirmation: document.getElementById('confirmNewPassword').value,
+        password: document.getElementById("newPassword").value,
+        password_confirmation: document.getElementById("confirmNewPassword").value,
       }
     }
-    var headers = ReactOnRails.authenticityHeaders()
+    const headers = ReactOnRails.authenticityHeaders()
     request
       .put("http://localhost:3000/users")
-      .set('Authorization', headers)
+      .set("Authorization", headers)
       .send(userInfo)
       .end((err, res) => {
         if (err) {
@@ -45,33 +45,40 @@ export default class Edit extends BaseComponent {
         } else {
           this.setState({ editingSuccessful : true})
         }
-      })
-  }
+      });
+  };
 
+  getEditData() {
+    let customClass = "hidden";
+    let message = "";
+    switch(this.state.editSuccessful) {
+      case "true":
+        message = "Password successfully updated";
+        customClass = "";
+        break;
+      case "false":
+        message = "There was an error updating your password";
+        customClass = "";
+        break;
+    };
+    return {message: message, customClass: customClass};
+  };
 
   render() {
     const { dispatch, actions, currentUser } = this.props
-    var customClass = 'hidden'
-    var message = ''
-    if (this.state.editingSuccessful) {
-      message = 'Password successfully updated'
-      customClass = ''
-    } else if (this.state.editingSuccessful == false) {
-      message = 'There was an error updating your password'
-      customClass = ''
-    }
-      return (
-        <div>
-          <h2>Edit Account</h2>
-          <form>
-            <input id='newPassword' placeholder=' new password'/>
-            <input id='confirmNewPassword' placeholder='retype new password'/>
-            <button onClick={this.handleUpdate}>Submit</button>
-          </form>
-          <p className={customClass}>{message}</p>
-          <Logout dispatch={dispatch} signout={actions.signout} />
-          <Delete currentUser={currentUser} dispatch={dispatch} signout={actions.signout} />
-        </div>
-      )
-    }
-  }
+    let editData = this.getEditData()
+    return (
+      <div>
+        <h2>Edit Account</h2>
+        <form>
+          <input id="newPassword" placeholder="new password"/>
+          <input id="confirmNewPassword" placeholder="retype new password"/>
+          <button onClick={this.handleUpdate}>Submit</button>
+        </form>
+        <p className={editData.customClass}>{editData.message}</p>
+        <Logout dispatch={dispatch} signout={actions.signout} />
+        <Delete currentUser={currentUser} dispatch={dispatch} signout={actions.signout} />
+      </div>
+    );
+  };
+};

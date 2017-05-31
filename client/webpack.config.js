@@ -1,46 +1,42 @@
-/* eslint comma-dangle: ["error",
- {"functions": "never", "arrays": "only-multiline", "objects":
- "only-multiline"} ] */
+const webpack = require("webpack");
+const pathLib = require("path");
 
-const webpack = require('webpack');
-const pathLib = require('path');
-
-const devBuild = process.env.NODE_ENV !== 'production';
+const devBuild = process.env.NODE_ENV !== "production";
 
 const config = {
   entry: [
-    'es5-shim/es5-shim',
-    'es5-shim/es5-sham',
-    'babel-polyfill',
-    './app/bundles/Users/startup/registration',
+    "es5-shim/es5-shim",
+    "es5-shim/es5-sham",
+    "babel-polyfill",
+    "./app/bundles/Users/startup/registration",
   ],
 
   output: {
-    filename: 'webpack-bundle.js',
-    path: pathLib.resolve(__dirname, '../app/assets/webpack'),
+    filename: "webpack-bundle.js",
+    path: pathLib.resolve(__dirname, "../app/assets/webpack"),
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: [".js", ".jsx"],
   },
   plugins: [
-    new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
+    new webpack.EnvironmentPlugin({ NODE_ENV: "development" }),
   ],
   module: {
     rules: [
       {
-        test: require.resolve('react'),
+        test: require.resolve("react"),
         use: {
-          loader: 'imports-loader',
+          loader: "imports-loader",
           options: {
-            shim: 'es5-shim/es5-shim',
-            sham: 'es5-shim/es5-sham',
+            shim: "es5-shim/es5-shim",
+            sham: "es5-shim/es5-sham",
           }
         },
       },
       {
         test: /\.jsx?$/,
-        use: 'babel-loader',
+        use: "babel-loader",
         exclude: /node_modules/,
       },
     ],
@@ -50,8 +46,8 @@ const config = {
 module.exports = config;
 
 if (devBuild) {
-  console.log('Webpack dev build for Rails'); // eslint-disable-line no-console
-  module.exports.devtool = 'eval-source-map';
+  console.log("Webpack dev build for Rails"); // eslint-disable-line no-console
+  module.exports.devtool = "eval-source-map";
 } else {
-  console.log('Webpack production build for Rails'); // eslint-disable-line no-console
+  console.log("Webpack production build for Rails"); // eslint-disable-line no-console
 }
