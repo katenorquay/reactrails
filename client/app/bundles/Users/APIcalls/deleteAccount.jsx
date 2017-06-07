@@ -1,10 +1,12 @@
-import request from 'superagent'
+import request from 'superagent';
+import ReactOnRails from 'react-on-rails';
 
 function deleteAccount(userInfo, dispatch, signout) {
-  var headers = ReactOnRails.authenticityHeaders()
+  console.log(userInfo)
   request
     .delete("http://localhost:3000/users")
-    .set('Authorization',  headers)
+    .set('Authorization', userInfo.token)
+    // .set('Authorization', ReactOnRails.authenticityHeaders())
     .send(userInfo)
     .end((err, res) => {
       if (err) {

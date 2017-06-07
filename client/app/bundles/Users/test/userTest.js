@@ -11,7 +11,7 @@ test("tests LOGIN_INIT", function (t) {
   var initial = {
     loginInProgress: false
   };
-  freeze(initial)
+  freeze(initial);
   var expected = {
     loginInProgress: true
   };
@@ -27,7 +27,7 @@ test("test LOGIN_SUCCESSFUL", function(t) {
     loggedIn: false,
     currentUser: {}
   };
-  freeze(initial)
+  freeze(initial);
   var expected = {
     loginInProgress: false,
     loginUnsuccessful: false,
@@ -44,7 +44,7 @@ test("test LOGIN_UNSUCCESSFUL", function (t) {
     loginInProgress: true,
     loginUnsuccessful: false
   };
-  freeze(initial)
+  freeze(initial);
   var expected = {
     loginInProgress: false,
     loginUnsuccessful: true
@@ -59,6 +59,7 @@ test("test SIGNUP_UNSUCCESSFUL", function (t) {
     loginInProgress: true,
     signupError: false
   };
+  freeze(initial);
   var expected = {
     loginInProgress: false,
     signupError: true
@@ -74,6 +75,7 @@ test("test SIGNOUT", function (t) {
     currentUser: {id: 12, email: "bella@mailcom"},
     signUp: true
   };
+  freeze(initial);
   var expected = {
     loggedIn: false,
     currentUser: {},
@@ -89,6 +91,7 @@ test("test TOGGLE_SIGNUP_LOGIN", function (t) {
     signUp: true,
     loginUnsuccessful: true
   };
+  freeze(initial);
   var expected = {
     signUp: false,
     loginUnsuccessful: false

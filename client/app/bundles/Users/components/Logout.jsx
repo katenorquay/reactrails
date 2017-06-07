@@ -1,10 +1,9 @@
 import React, { Component } from "react"
-import BaseComponent from "../lib/BaseComponent"
 import _ from "lodash";
 import PropTypes from "prop-types";
 import logoutService from "../APIcalls/logoutService"
 
-export default class Logout extends BaseComponent {
+export default class Logout extends React.PureComponent {
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,

@@ -1,16 +1,19 @@
 import request from 'superagent';
+import ReactOnRails from 'react-on-rails';
 
 function loginService(userInfo, dispatch, actions) {
-  dispatch(actions.loginInit());
+  const { loginInit, signupUnsuccessful, loginSuccessful } = actions
+  dispatch(loginInit());
   request
     .post('http://localhost:3000/users/sign_in')
     .send(userInfo)
     .end((err, res) => {
       if (err) {
-        dispatch(actions.loginUnsuccessful(err))
+        dispatch(loginUnsuccessful(err))
       } else if (res) {
-        var user = {id: res.body.id, email: res.body.email}
-        dispatch(actions.loginSuccessful(user))
+        var user = {id: res.body.user.id, email: res.body.user.email, token: res.body.token}
+        console.log(user)
+        dispatch(loginSuccessful(user))
       }
     });
 };

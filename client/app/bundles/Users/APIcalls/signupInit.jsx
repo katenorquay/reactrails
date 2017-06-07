@@ -10,8 +10,9 @@ function signupInit(userInfo, dispatch, actions) {
       if (err) {
         dispatch(signupUnsuccessful())
       } else if (res) {
-        console.log(res)
-        dispatch(loginSuccessful(res.body))
+        var user = {id: res.body.user.id, email: res.body.user.email, token: res.body.token}
+        console.log(user)
+        dispatch(loginSuccessful(user))
       }
     });
 };

@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
-import BaseComponent from "../lib/BaseComponent"
 import _ from "lodash";
 import loginService from "../APIcalls/loginService"
 
-export default class Login extends BaseComponent {
+export default class Login extends React.PureComponent {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
@@ -21,8 +20,10 @@ export default class Login extends BaseComponent {
     e.preventDefault()
     const { dispatch, actions } = this.props
     const userInfo = {
+      user: {
         email: document.getElementById("email").value,
-        password: document.getElementById("password").value,
+        password: document.getElementById("password").value
+      }
     };
     loginService(userInfo, dispatch, actions)
   };
@@ -41,9 +42,9 @@ export default class Login extends BaseComponent {
           <input id="email" placeholder="email"/>
           <input id="password" placeholder="password"/>
           <button onClick={this.handleLogin}>Submit</button>
-          <button onClick={this.newSignup}>Sign Up</button>
-          <p className={errorClass}>Login was unsuccessful</p>
         </form>
+        <button onClick={this.newSignup}>Sign Up</button>
+        <p className={errorClass}>Login was unsuccessful</p>
       </div>
     );
   };

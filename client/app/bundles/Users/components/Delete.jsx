@@ -1,10 +1,9 @@
 import React, { Component } from "react"
-import BaseComponent from "../lib/BaseComponent"
 import _ from "lodash";
 import PropTypes from "prop-types";
 import deleteAccount from "../APIcalls/deleteAccount"
 
-export default class Delete extends BaseComponent {
+export default class Delete extends React.PureComponent {
 
   static propTypes = {
     currentUser: PropTypes.object.isRequired,
@@ -13,14 +12,14 @@ export default class Delete extends BaseComponent {
   };
 
   constructor() {
-     super();
-     _.bindAll(this, "handleDelete");
-   };
+    super();
+    _.bindAll(this, "handleDelete");
+  };
 
-   handleDelete() {
-     const { dispatch, currentUser, signout } = this.props
-     let userInfo = { user: { email: currentUser.email }}
-     deleteAccount(userInfo, dispatch, signout)
+  handleDelete() {
+    const {currentUser, dispatch, signout } = this.props
+    let userInfo = { user: { email: currentUser.email }}
+    deleteAccount(userInfo, dispatch, signout)
   };
 
   render () {

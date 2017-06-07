@@ -1,18 +1,17 @@
 import PropTypes from "prop-types";
 import React from "react";
-import BaseComponent from "../lib/BaseComponent"
 import _ from "lodash";
 import request from "superagent";
 import ReactOnRails from "react-on-rails";
 import Delete from "./Delete"
 import Logout from "./Logout"
 
-export default class Edit extends BaseComponent {
+export default class Edit extends React.PureComponent {
 
   static propTypes = {
-    currentUser: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired
   };
 
   constructor() {
@@ -34,16 +33,17 @@ export default class Edit extends BaseComponent {
         password_confirmation: document.getElementById("confirmNewPassword").value,
       }
     }
-    const headers = ReactOnRails.authenticityHeaders()
+    console.log('userinfo', userInfo)
     request
       .put("http://localhost:3000/users")
-      .set("Authorization", headers)
+      .set('Authorization', currentUser.token)
+      // .set('Authorization', ReactOnRails.authenticityHeaders())
       .send(userInfo)
       .end((err, res) => {
         if (err) {
-          this.setState({ editingSuccessful: false });
+          this.setState({ editSuccessful: "false" });
         } else {
-          this.setState({ editingSuccessful : true})
+          this.setState({ editSuccessful : "true"})
         }
       });
   };
@@ -66,7 +66,7 @@ export default class Edit extends BaseComponent {
 
   render() {
     const { dispatch, actions, currentUser } = this.props
-    let editData = this.getEditData()
+    const editData = this.getEditData()
     return (
       <div>
         <h2>Edit Account</h2>

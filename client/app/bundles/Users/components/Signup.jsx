@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
-import BaseComponent from "../lib/BaseComponent"
 import _ from "lodash";
 import signupInit from "../APIcalls/signupInit"
 
-export default class Signup extends BaseComponent {
+export default class Signup extends React.PureComponent {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
@@ -44,9 +43,9 @@ export default class Signup extends BaseComponent {
           <input id="password" placeholder="password"/>
           <input id="password_confirmation" placeholder="retype password"/>
           <button onClick={this.handleSignup}>Submit</button>
-          <button onClick={this.newLogin}>Login</button>
-          <p className={errorClass}>Signup was unsuccessful</p>
         </form>
+        <button onClick={this.newLogin}>Login</button>
+        <p className={errorClass}>Signup was unsuccessful</p>
       </div>
     );
   };

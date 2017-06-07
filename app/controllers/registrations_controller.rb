@@ -3,10 +3,10 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.new(user_params)
     if @user.save
-      render json: @user
+        sign_in :user, @user
+        render :json => {:user => @user, :token => session[:_csrf_token]}
     else
-      warden.custom_failure!
-      render json: { error: 'signup error' }, status: :unprocessable_entity
+      invalid_signup_attempt
     end
   end
 
@@ -34,5 +34,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   def user_params
      params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def invalid_signup_attempt
+    warden.custom_failure!
+    render json: { error: 'signup error' }, status: :unprocessable_entity
   end
 end
